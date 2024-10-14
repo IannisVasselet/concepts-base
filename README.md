@@ -1,5 +1,3 @@
----
-
 # Projet Fullstack avec Docker : Backend Node.js et Frontend React
 
 ## Table des matières
