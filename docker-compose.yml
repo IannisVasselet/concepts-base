@@ -1,0 +1,35 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://user:password@db:5432/mydb
+
+  frontend:
+    build: ./frontend
+    networks:
+      - app-network
+    ports:
+      - "8080:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000
+
+  db:
+    image: postgres:14
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user 
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  db-data:
