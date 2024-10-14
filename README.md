@@ -1,5 +1,3 @@
-Bien sûr ! Voici un exemple de fichier `README.md` structuré pour ton projet. Ce fichier explique l'architecture de l'application, les Dockerfiles, la gestion de la persistance, la mise en réseau des conteneurs, ainsi que des instructions pour l'exécution du projet.
-
 ---
 
 # Projet Fullstack avec Docker : Backend Node.js et Frontend React
@@ -56,8 +54,8 @@ Avant de commencer, assurez-vous d'avoir installé les outils suivants :
 ### 1. Clonez le dépôt
 
 ```bash
-git clone https://github.com/username/project-name.git
-cd project-name
+git clone https://github.com/IannisVasselet/concepts-base.git
+cd concepts-base
 ```
 
 ### 2. Construisez et lancez les conteneurs
@@ -86,9 +84,7 @@ docker run -d --name frontend --network app-network -p 80:80 frontend-image
 docker run -d --name db --network app-network -v db-data:/var/lib/postgresql/data -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=mydb postgres:14
 ```
 
-#### Option 2 : Utiliser Docker Compose (facultatif)
-
-Vous pouvez aussi utiliser `docker-compose.yml` pour lancer tous les conteneurs en une seule commande. Voici un exemple de fichier `docker-compose.yml` :
+#### Option 2 : Utiliser Docker Compose
 
 ```yaml
 version: '3'
@@ -198,15 +194,12 @@ Ce volume est monté dans le conteneur PostgreSQL, comme indiqué dans les Docke
 
 ## Mise en réseau des conteneurs
 
-Les conteneurs sont connectés via un réseau Docker personnalisé. Cela permet au backend et à la base de données de communiquer via des noms de services (par exemple, le backend peut accéder à la base de données avec `db` comme nom d'hôte).
-
+Les conteneurs sont connectés via un réseau Docker personnalisé. Cela permet au backend et à la base de données de communiquer via des noms de services.
 ### Créer le réseau Docker
 
 ```bash
 docker network create app-network
 ```
-
-Ensuite, lors du lancement des conteneurs, assurez-vous de les connecter à ce réseau.
 
 ---
 
@@ -214,8 +207,8 @@ Ensuite, lors du lancement des conteneurs, assurez-vous de les connecter à ce r
 
 ### 1. Tester l'interface utilisateur
 
-- Accédez à l'URL `http://localhost` pour ouvrir l'application frontend.
-- Le frontend doit communiquer avec le backend et afficher les données récupérées via l'API.
+- Accédez à localhost pour ouvrir l'application frontend.
+- Le frontend doit communiquer avec le backend et afficher les données récupérées via l'API. (API comming soon)
 
 ### 2. Tester la persistance des données
 
@@ -230,16 +223,5 @@ docker start <container_name>
 3. Vérifiez que les données sont toujours présentes après le redémarrage.
 
 ---
-
-## Bonnes pratiques
-
-- Utilisation du **multi-stage build** pour réduire la taille des images Docker.
-- Utilisation des **variables d'environnement** pour rendre la configuration dynamique (ex. API_URL, NODE_ENV).
-- **Gestion de la persistance** via les volumes Docker pour éviter toute perte de données.
-- **Mise en réseau** des conteneurs pour une communication fluide entre les services.
-
----
-
-## Conclusion
 
 Ce projet présente une architecture fullstack dockerisée avec un backend Node.js, un frontend React, et une base de données PostgreSQL. L'usage des multi-stage builds permet d'optimiser la taille des images Docker, et la persistance des données est gérée via des volumes Docker. Le réseau Docker assure une communication fluide entre les conteneurs.
