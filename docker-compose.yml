@@ -1,35 +1,50 @@
-version: '3'
+version: '3.8'
 services:
   backend:
     build: ./backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3000:3000"
     networks:
       - app-network
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=postgres://user:password@db:5432/mydb
-
+    secrets:
+      - db_password
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: npm run dev
   frontend:
     build: ./frontend
+    env_file:
+      - ./frontend/.env
     networks:
       - app-network
     ports:
       - "8080:80"
-    environment:
-      - REACT_APP_API_URL=http://localhost:3000
-
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/conf.d/default.conf
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
   db:
     image: postgres:14
     volumes:
       - db-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: user 
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+    env_file:
+      - ./db.env
     networks:
       - app-network
-
+    secrets:
+      - db_password
 networks:
   app-network:
-
 volumes:
   db-data:
+configs:
+  nginx_conf:
+    file: ./frontend/nginx.conf
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt

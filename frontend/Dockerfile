@@ -1,3 +1,4 @@
+# DockerFile pour le frontend
 # Étape 1: Build
 FROM node:18 AS build
 WORKDIR /app

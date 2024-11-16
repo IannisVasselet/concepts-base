@@ -1,1 +1,6 @@
+# gitignore file racine
+
 .DS_Store
+
+.env
+db.env
