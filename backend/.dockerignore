@@ -1,0 +1,6 @@
+# DockerIgnore file for backend
+node_modules
+npm-debug.log
+Dockerfile
+docker-compose.yml
+.env

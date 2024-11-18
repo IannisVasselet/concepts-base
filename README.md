@@ -223,3 +223,26 @@ docker start <container_name>
 ---
 
 Ce projet présente une architecture fullstack dockerisée avec un backend Node.js, un frontend React, et une base de données PostgreSQL. L'usage des multi-stage builds permet d'optimiser la taille des images Docker, et la persistance des données est gérée via des volumes Docker. Le réseau Docker assure une communication fluide entre les conteneurs.
+
+## Modes de lancement et commandes
+
+### Lancer les services avec Docker Compose
+
+Pour lancer tous les services, utilisez la commande suivante :
+
+```sh
+docker-compose up --build -d
+```
+
+### Arrêter les services
+
+Pour arrêter les services, utilisez la commande suivante :
+
+```sh
+docker-compose down
+```
+
+### Valider la configuration
+```sh
+docker-compose config
+``` 

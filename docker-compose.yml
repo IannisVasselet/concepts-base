@@ -1,7 +1,9 @@
-version: '3.8'
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend:latest
     env_file:
       - ./backend/.env
     ports:
@@ -15,7 +17,10 @@ services:
       - /app/node_modules
     command: npm run dev
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend:latest
     env_file:
       - ./frontend/.env
     networks:
@@ -38,13 +43,17 @@ services:
       - app-network
     secrets:
       - db_password
+
 networks:
   app-network:
+
 volumes:
   db-data:
+
 configs:
   nginx_conf:
     file: ./frontend/nginx.conf
+
 secrets:
   db_password:
     file: ./secrets/db_password.txt
