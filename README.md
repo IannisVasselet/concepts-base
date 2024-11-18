@@ -245,4 +245,44 @@ docker-compose down
 ### Valider la configuration
 ```sh
 docker-compose config
-``` 
+```
+
+## Fichiers de configuration
+
+### Fichiers `.env`
+
+#### Backend
+
+Créez un fichier `backend/.env` avec le contenu suivant :
+
+```env
+NODE_ENV=production
+DATABASE_URL=postgres://user:password@db:5432/mydb
+```
+
+#### Frontend
+
+Créez un fichier `frontend/.env` avec le contenu suivant :
+
+```env
+REACT_APP_API_URL=http://localhost:3000
+```
+
+#### Base de données
+
+Créez un fichier `db.env` avec le contenu suivant :
+
+```env
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
+POSTGRES_DB=mydb
+```
+
+#### Fichier de secrets
+
+Créez un fichier `secrets/db_password.txt` avec le contenu suivant :
+
+```env
+password
+```
+
